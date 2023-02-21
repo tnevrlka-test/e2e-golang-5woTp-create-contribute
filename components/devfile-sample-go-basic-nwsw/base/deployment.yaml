@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: devfile-sample-go-basic-nwsw
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: devfile-sample-go-basic-nwsw
+    app.kubernetes.io/part-of: e2e-golang
+  name: devfile-sample-go-basic-nwsw
+  namespace: e2e-demos-vyge-tenant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-app
+      app.kubernetes.io/instance: devfile-sample-go-basic-nwsw
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: go-app
+        app.kubernetes.io/instance: devfile-sample-go-basic-nwsw
+    spec:
+      containers:
+      - image: quay.io/redhat-appstudio-qe/test-images-protected:5woTp-devfile-sample-go-basic-nwsw
+        name: my-go
+        ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 10m
+            memory: 10Mi
+status: {}
